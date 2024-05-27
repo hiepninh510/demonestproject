@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Param } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Product } from "../../models/product.model";
@@ -9,5 +9,9 @@ export class ProductService{
 
     async getAllProducts():Promise<Product[]>{
         return this.productModel.find().exec();
+    }
+
+    async getByProductID(@Param('id') id:string):Promise<Product>{
+        return await this.productModel.findById(id).exec();
     }
 }
