@@ -5,13 +5,13 @@ import { Product } from "../../models/product.model";
 
 @Injectable()
 export class ProductService{
-    constructor(@InjectModel(Product.name) private productModel:Model<Product>){};
+    constructor(@InjectModel(Product.name) private productModel:Model<any>){};
 
-    async getAllProducts():Promise<Product[]>{
+    async getAllProducts():Promise<any[]>{
         return this.productModel.find().exec();
     }
 
-    async getByProductID(@Param('id') id:string):Promise<Product>{
+    async getByProductID(@Param('id') id:string):Promise<any>{
         return await this.productModel.findById(id).exec();
     }
 }

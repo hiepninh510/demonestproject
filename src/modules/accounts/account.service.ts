@@ -7,14 +7,14 @@ import { Account } from "../../models/account.model";
 
 @Injectable()
     export class AccountService{
-        constructor(@InjectModel(Account.name) private accountModel:Model<Account>){};
+        constructor(@InjectModel(Account.name) private accountModel:Model<any>){};
 
-    async accountLogin(account:loginDTO):Promise<Account>{
+    async accountLogin(account:loginDTO):Promise<any>{
         const login = await this.accountModel.findOne({"email":account.email,"password":account.password})
         return login;
     }
 
-    async accountRegister(account:registerDTO):Promise<Account>{
+    async accountRegister(account:registerDTO):Promise<any>{
         const register = await this.accountModel.findOne({"email":account.email,"password":account.password});
         const data = new this.accountModel();
             if(!register){

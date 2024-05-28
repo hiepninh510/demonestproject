@@ -1,6 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { AccountService } from "./account.service";
-import { Account } from "../../models/account.model";
 import { loginDTO, registerDTO } from "./creatAccount.dto";
 
 @Controller("account")
@@ -8,12 +7,12 @@ import { loginDTO, registerDTO } from "./creatAccount.dto";
         constructor(private readonly accountService:AccountService){};
 
         @Post("login")
-        async accountLogin(@Body() account:loginDTO):Promise<Account>{
+        async accountLogin(@Body() account:loginDTO):Promise<any>{
             return this.accountService.accountLogin(account);
         };
 
         @Post("register")
-        async accountRegister(@Body() account:registerDTO):Promise<Account>{
+        async accountRegister(@Body() account:registerDTO):Promise<any>{
             return this.accountService.accountRegister(account);
         }
 
