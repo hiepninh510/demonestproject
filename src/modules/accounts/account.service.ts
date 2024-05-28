@@ -1,8 +1,8 @@
 import { Injectable} from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { loginDTO, registerDTO } from "./creatAccount.dto";
 import { Account } from "../../models/account.model";
+import { loginDTO, registerDTO } from "./creatAccount.dto";
 
 
 @Injectable()
@@ -10,7 +10,7 @@ import { Account } from "../../models/account.model";
         constructor(@InjectModel(Account.name) private accountModel:Model<any>){};
 
     async accountLogin(account:loginDTO):Promise<any>{
-        const login = await this.accountModel.findOne({"email":account.email,"password":account.password})
+        const login = await this.accountModel.findOne({"email":account.email, "password":account.password})
         return login;
     }
 
