@@ -5,7 +5,7 @@ import { jwtConstants } from "./constants";
 
 @Injectable()
 export class AuthGurad implements CanActivate{
-    constructor(private jwtService: JwtService){}
+    constructor(private jwtService: JwtService){};
     async canActivate(context: ExecutionContext): Promise<boolean>{
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
@@ -26,13 +26,13 @@ export class AuthGurad implements CanActivate{
         
     }
 
-    private extractTokenFromHeader(request: Request): string | undefined {
-        const authorizationHeader = request.headers.get('Authorization');
+    private extractTokenFromHeader(request: Request): string {
+        const authorizationHeader = request.headers['authorization'];
         if (!authorizationHeader) {
-            return undefined;
+            return '';
         }
         const [type, token] = authorizationHeader.split(' ');
-        return type === 'Bearer' ? token : undefined;
+        return type === 'Bearer' ? token : '';
     }
     
 }

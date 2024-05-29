@@ -1,5 +1,7 @@
-import { Controller, Get, Param} from "@nestjs/common";
+import { Controller, Get, Param, UseGuards} from "@nestjs/common";
 import { ProductService } from "./product.service";
+import { AuthGurad } from "../auths/auth.gurads";
+
 
 @Controller()
 export class ProductController{
@@ -9,7 +11,8 @@ export class ProductController{
         return this.productService.getAllProducts();
     }
 
-    @Get("products/id=?:id")
+    @UseGuards(AuthGurad)
+    @Get("products/:id")
     async getByProductID(@Param('id') id:string):Promise<any>{
         return this.productService.getByProductID(id);
     }
