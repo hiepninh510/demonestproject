@@ -11,4 +11,5 @@ export class AuthController{
     async singIn(@Body() accountLogin:loginDTO):Promise<any>{
         return this.authService.singIn(accountLogin);
     }
+
 }

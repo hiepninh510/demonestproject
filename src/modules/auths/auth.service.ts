@@ -11,16 +11,18 @@ export class AuthService{
 
     ){};
 
-    async singIn(account:loginDTO):Promise<{access_token:string, any}>{
+    async singIn(account:loginDTO):Promise<{access_token:string}>{
         const user = await this.accountUser.accountLogin(account);
         if(!user){
             throw new UnauthorizedException();
         }
 
-        delete user.password;
-        const { ...result} = user;
+        // delete user.password;
+        // const { ...result} = user;
+        // return result;
 
-        return result;
+        const payload = {sub: user.id, username:user.email};
+        return {access_token:await this.jwtService.signAsync(payload)};
     }
 
 }
