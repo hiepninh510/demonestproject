@@ -18,6 +18,7 @@ export class AuthGurad implements CanActivate{
             });
             
             request['user']=payload;
+            console.log(payload);
         } catch (error) {
             throw new UnauthorizedException()  
         }
