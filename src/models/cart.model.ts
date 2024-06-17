@@ -5,14 +5,14 @@ export type CartDocument = HydratedDocument<Cart>;
 
 @Schema()
 export class Cart{
-    @Prop({type:[{id:String,number:Number}]})
-    products:{id:string,number:number}[];
 
     @Prop({require:true,unique:true})
     email:string;
 
-    @Prop({default:false})
-    delete:boolean;
+    @Prop({type:Date, default:Date.now})
+    date_created: Date;
+
+
 }
 
 export const CartSchema = SchemaFactory.createForClass(Cart);

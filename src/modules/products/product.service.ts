@@ -1,6 +1,6 @@
 import { Injectable,} from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, ObjectId } from "mongoose";
+import { Model, Types} from "mongoose";
 import { Product } from "../../models/product.model";
 import { CartService } from "../carts/cart.service";
 
@@ -31,8 +31,9 @@ export class ProductService{
     }
 
 
-    async add_Product_To_Cart(id:ObjectId,email:string):Promise<any>{
-        const product = await this.productModel.findById(id).exec();
+    async add_Product_To_Cart(id:string,email:string):Promise<any>{
+        const product = await this.productModel.findById(new Types.ObjectId(id)).exec();
+        console.log(typeof(product.id));
         if(product){
             const message = await this.cartService.add_To_Cart(product.id,email);
             return message?message:"Không tồn tại";

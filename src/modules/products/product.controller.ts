@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Req, UseGuards} from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { AuthGurad } from "../auths/auth.gurads";
-import { ObjectId } from "mongoose";
 
 
 @Controller()
@@ -26,7 +25,7 @@ export class ProductController{
 
     @UseGuards(AuthGurad)
     @Get("products/addtocart/:id")
-    async add_To_Cart(@Param('id') id:ObjectId, @Req() req):Promise<any>{
+    async add_To_Cart(@Param('id') id:string, @Req() req):Promise<any>{
         const email = req.user.email;
         if(!email){
             throw new Error('Username not found in JWT payload');
